@@ -4,13 +4,10 @@ compdfkit.pojo package
 Submodules
 ----------
 
-compdfkit.pojo.compdfkit module
--------------------------------
+.. toctree::
+   :maxdepth: 4
 
-.. automodule:: compdfkit.pojo.compdfkit
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   compdfkit.pojo.compdfkit
 
 Module contents
 ---------------

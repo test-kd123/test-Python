@@ -1,6 +1,6 @@
 .idea
 dist
-compdfkit.egg-info
+compdfkit_api_python.egg-info
 build
 .pytest_cache
 *__pycache__

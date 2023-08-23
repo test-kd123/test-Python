@@ -18,6 +18,7 @@ release = '1.3.2'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = ['sphinx.ext.autodoc',
+              'sphinx.ext.autosummary',
               'sphinx.ext.doctest',
               'sphinx.ext.intersphinx',
               'sphinx.ext.todo',
@@ -40,5 +41,4 @@ html_static_path = ['_static']
 
 html_logo = '_static/logo.svg'
 html_favicon = '_static/favicon.ico'
-
 

@@ -56,7 +56,7 @@ class CPDFClient:
         """
         return self._http_client.get_tools()
 
-    def get_file_info(self, file_key, language=None):
+    def get_file_info(self, file_key, language=CPDFLanguageConstant.ENGLISH):
         """
         Get the download link of the corresponding result file according to the filekey of each file.
 
@@ -112,7 +112,7 @@ class CPDFClient:
             raise CPDFException(cause="The task object is not a valid type.")
 
     def upload_file(self, file, task_id, password=None, file_parameter=None,
-                    image=None, image_file_name=None):
+                    image=None, image_file_name=None, language=CPDFLanguageConstant.ENGLISH):
         """
         Upload the original file and bind the file to the task ID.
         The field parameter is used to pass the JSON string to set the processing parameters for the file.
@@ -120,25 +120,29 @@ class CPDFClient:
         Please note that a maximum of five files can be uploaded for a task ID
         and no files can be uploaded for that task after it has started.
 
+
         :type file: str
         :type task_id: str
         :type password: str
         :type file_parameter: CPDFFileParameter
         :type image: str
         :type image_file_name: str
+        :type language: int
         :param file: The file path to be uploaded.
         :param task_id: The id of the task.
         :param password: The password of the PDF file.
         :param file_parameter: The parameters of the task.
         :param image: The image path to be uploaded.
         :param image_file_name: The name of the image file.
+        :param language: The language of the log information. Default: English.
         :return: The result of the upload.
         """
         return self._get_upload_file_result(file=file, task_id=task_id, password=password,
-                                            file_parameter=file_parameter, image=image, image_file_name=image_file_name)
+                                            file_parameter=file_parameter, image=image, image_file_name=image_file_name,
+                                            language=language)
 
     def _get_upload_file_result(self, file, task_id, password=None, file_parameter=None,
-                                image=None, image_file_name=None):
+                                image=None, image_file_name=None, language=CPDFLanguageConstant.ENGLISH):
         (file_path, file_name) = os.path.split(file)
 
         if image_file_name is None:
@@ -146,27 +150,31 @@ class CPDFClient:
 
         return self._http_client.get_upload_file_result(file=file, task_id=task_id, password=password,
                                                         file_parameter=file_parameter, file_name=file_name, image=image,
-                                                        image_file_name=image_file_name)
+                                                        image_file_name=image_file_name, language=language)
 
-    def execute_task(self, task_id):
+    def execute_task(self, task_id, language=CPDFLanguageConstant.ENGLISH):
         """
         After the file upload is completed, call this interface with the task ID to process file.
 
         :type task_id: str
         :param task_id: The id of the task.
+        :type language: int
+        :param language: The language of the logout. Default: English.
         :return: The result of the task.
         """
-        return self._http_client.execute_task(task_id)
+        return self._http_client.execute_task(task_id, language=language)
 
-    def get_task_info(self, task_id):
+    def get_task_info(self, task_id, language=CPDFLanguageConstant.ENGLISH):
         """
         Request task status and file-related metadata based on the task ID.
 
         :type task_id: str
         :param task_id: The id of the task.
+        :type language: int
+        :param language: The language of the logout. Default: English.
         :return: The information of the task.
         """
-        return self._http_client.get_task_info(task_id)
+        return self._http_client.get_task_info(task_id, language=language)
 
 
 class CPDFHttpClient:
