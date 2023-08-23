@@ -65,7 +65,7 @@ class CPDFAddWatermarkParameter(CPDFFileParameter):
     @property
     def type(self):
         """
-        :return: type of the watermark.Must be 'text' or 'image'.
+        Type of the watermark.Must be 'text' or 'image'.
         """
         return self._type
 
@@ -78,7 +78,7 @@ class CPDFAddWatermarkParameter(CPDFFileParameter):
     @property
     def scale(self):
         """
-        :return: scale of the watermark. Must be greater than 0.
+        Scale of the watermark. Must be greater than 0.
         """
         return self._scale
 
@@ -91,7 +91,7 @@ class CPDFAddWatermarkParameter(CPDFFileParameter):
     @property
     def opacity(self):
         """
-        :return: opacity of the watermark. Must be between 0 and 1.
+        Opacity of the watermark. Must be between 0 and 1.
         """
         return self._opacity
 
@@ -104,7 +104,7 @@ class CPDFAddWatermarkParameter(CPDFFileParameter):
     @property
     def rotation(self):
         """
-        :return: rotation of the watermark.
+        Rotation of the watermark.
         """
         return self._rotation
 
@@ -115,7 +115,7 @@ class CPDFAddWatermarkParameter(CPDFFileParameter):
     @property
     def target_pages(self):
         """
-        :return: target pages of the watermark. Must be in format like 1,2,3 or 1-3,4,5.
+        Target pages of the watermark. Must be in format like 1,2,3 or 1-3,4,5.
         """
         return self._target_pages
 
@@ -126,7 +126,7 @@ class CPDFAddWatermarkParameter(CPDFFileParameter):
     @property
     def vertalign(self):
         """
-        :return: vertical alignment of the watermark. Must be 'top', 'center' or 'bottom'.
+        Vertical alignment of the watermark. Must be 'top', 'center' or 'bottom'.
         """
         return self._vertalign
 
@@ -139,7 +139,7 @@ class CPDFAddWatermarkParameter(CPDFFileParameter):
     @property
     def horizalign(self):
         """
-        :return: horizontal alignment of the watermark. Must be 'left', 'center' or 'right'.
+        Horizontal alignment of the watermark. Must be 'left', 'center' or 'right'.
         """
         return self._horizalign
 
@@ -152,7 +152,7 @@ class CPDFAddWatermarkParameter(CPDFFileParameter):
     @property
     def xoffset(self):
         """
-        :return: x offset of the watermark.
+        x offset of the watermark.
         """
         return self._xoffset
 
@@ -163,7 +163,7 @@ class CPDFAddWatermarkParameter(CPDFFileParameter):
     @property
     def yoffset(self):
         """
-        :return: y offset of the watermark.
+        y offset of the watermark.
         """
         return self._yoffset
 
@@ -174,7 +174,7 @@ class CPDFAddWatermarkParameter(CPDFFileParameter):
     @property
     def content(self):
         """
-        :return: content of the watermark.
+        Content of the watermark.
         """
         return self._content
 
@@ -185,7 +185,7 @@ class CPDFAddWatermarkParameter(CPDFFileParameter):
     @property
     def text_color(self):
         """
-        :return: text color of the watermark. Must be in hex format like #000000.
+        Text color of the watermark. Must be in hex format like #000000.
         """
         return self._text_color
 
@@ -196,7 +196,7 @@ class CPDFAddWatermarkParameter(CPDFFileParameter):
     @property
     def front(self):
         """
-        :return: the watermark is in front of page or not.
+        The watermark is in front of page or not.
         """
         return self._front
 
@@ -207,7 +207,7 @@ class CPDFAddWatermarkParameter(CPDFFileParameter):
     @property
     def full_screen(self):
         """
-        :return: the watermark is full screen or not.
+        The watermark is full screen or not.
         """
         return self._full_screen
 
@@ -218,7 +218,7 @@ class CPDFAddWatermarkParameter(CPDFFileParameter):
     @property
     def horizontal_space(self):
         """
-        :return: the horizontal space of full screen watermark.
+        The horizontal space of full screen watermark.
         """
         return self._horizontal_space
 
@@ -229,7 +229,7 @@ class CPDFAddWatermarkParameter(CPDFFileParameter):
     @property
     def vertical_space(self):
         """
-        :return: the vertical space of full screen watermark.
+        The vertical space of full screen watermark.
         """
         return self._vertical_space
 
@@ -240,7 +240,7 @@ class CPDFAddWatermarkParameter(CPDFFileParameter):
     @property
     def extension(self):
         """
-        :return: the extension message about watermark.
+        The extension message about watermark.
         """
         return self._extension
 
@@ -325,6 +325,10 @@ class CPDFFormRecognizerParameter(CPDFFileParameter):
 
     @property
     def lang(self):
+        """
+        The ocr language. Must be 'auto', 'english', 'chinese', 'chinese_tra', 'korean', 'japanese', 'latin' or
+        'devanagari'.
+        """
         return self._lang
 
     @lang.setter
@@ -364,6 +368,10 @@ class CPDFOcrParameter(CPDFFileParameter):
 
     @property
     def lang(self):
+        """
+        The ocr language. Must be 'auto', 'english', 'chinese', 'chinese_tra', 'korean', 'japanese', 'latin' or
+        'devanagari'.
+        """
         return self._lang
 
     @lang.setter
@@ -387,6 +395,9 @@ class CPDFPageDeleteParameter(CPDFFileParameter):
 
     @property
     def page_options(self):
+        """
+        The pages of the file to be deleted. The item in list must be in format like "1" or "1-3".
+        """
         return self._page_options
 
     @page_options.setter
@@ -406,6 +417,9 @@ class CPDFPageExtractParameter(CPDFFileParameter):
 
     @property
     def page_options(self):
+        """
+        The pages of the file to be extracted. The item in list must be in format like "1" or "1-3".
+        """
         return self._page_options
 
     @page_options.setter
@@ -427,6 +441,9 @@ class CPDFPageInsertParameter(CPDFFileParameter):
 
     @property
     def target_page(self):
+        """
+        The target page index of the file to be inserted.
+        """
         return self._target_page
 
     @target_page.setter
@@ -435,6 +452,9 @@ class CPDFPageInsertParameter(CPDFFileParameter):
 
     @property
     def width(self):
+        """
+        The width of the page to be inserted. Must be greater than 0.
+        """
         return self._width
 
     @width.setter
@@ -443,6 +463,9 @@ class CPDFPageInsertParameter(CPDFFileParameter):
 
     @property
     def height(self):
+        """
+        The height of the page to be inserted. Must be greater than 0.
+        """
         return self._height
 
     @height.setter
@@ -451,6 +474,9 @@ class CPDFPageInsertParameter(CPDFFileParameter):
 
     @property
     def number(self):
+        """
+        The number of the pages to be inserted. Must be greater than 0.
+        """
         return self._number
 
     @number.setter
@@ -474,6 +500,9 @@ class CPDFPageMergeParameter(CPDFFileParameter):
 
     @property
     def page_options(self):
+        """
+        The pages of the file to be merged. The item in list must be in format like "1" or "1-3".
+        """
         return self._page_options
 
     @page_options.setter
@@ -494,6 +523,9 @@ class CPDFPageRotationParameter(CPDFFileParameter):
 
     @property
     def page_options(self):
+        """
+        The pages of the file to be rotated. The item in list must be in format like "1" or "1-3".
+        """
         return self._page_options
 
     @page_options.setter
@@ -522,6 +554,9 @@ class CPDFPageSplitParameter(CPDFFileParameter):
 
     @property
     def page_options(self):
+        """
+        The pages of the file to be split. The item in list must be in format like "1" or "1-3".
+        """
         return self._page_options
 
     @page_options.setter
@@ -547,6 +582,9 @@ class CPDFToCSVParameter(CPDFFileParameter):
 
     @property
     def is_csv_merge(self):
+        """
+        Whether to merge the csv files or not.
+        """
         return self._is_csv_merge
 
     @is_csv_merge.setter
@@ -575,6 +613,9 @@ class CPDFToExcelParameter(CPDFFileParameter):
 
     @property
     def content_options(self):
+        """
+        The content options of the Excel file.
+        """
         return self._content_options
 
     @content_options.setter
@@ -583,6 +624,9 @@ class CPDFToExcelParameter(CPDFFileParameter):
 
     @property
     def worksheet_options(self):
+        """
+        The worksheet options of the Excel file.
+        """
         return self._worksheet_options
 
     @worksheet_options.setter
@@ -591,6 +635,9 @@ class CPDFToExcelParameter(CPDFFileParameter):
 
     @property
     def is_contain_annot(self):
+        """
+        Whether to contain the annotations or not.
+        """
         return self._is_contain_annot
 
     @is_contain_annot.setter
@@ -601,6 +648,9 @@ class CPDFToExcelParameter(CPDFFileParameter):
 
     @property
     def is_contain_img(self):
+        """
+        Whether to contain the images or not.
+        """
         return self._is_contain_img
 
     @is_contain_img.setter
@@ -634,6 +684,9 @@ class CPDFToHtmlParameter(CPDFFileParameter):
 
     @property
     def page_options(self):
+        """
+        The page options of the HTML file.
+        """
         return self._page_options
 
     @page_options.setter
@@ -645,6 +698,9 @@ class CPDFToHtmlParameter(CPDFFileParameter):
 
     @property
     def is_contain_annot(self):
+        """
+        Whether to contain the annotations or not.
+        """
         return self._is_contain_annot
 
     @is_contain_annot.setter
@@ -655,6 +711,9 @@ class CPDFToHtmlParameter(CPDFFileParameter):
 
     @property
     def is_contain_img(self):
+        """
+        Whether to contain the images or not.
+        """
         return self._is_contain_img
 
     @is_contain_img.setter
@@ -676,6 +735,9 @@ class CPDFToJpgParameter(CPDFFileParameter):
 
     @property
     def img_dpi(self):
+        """
+        The DPI of the image. Must be greater than 0.
+        """
         return self._img_dpi
 
     @img_dpi.setter
@@ -695,6 +757,9 @@ class CPDFToPngParameter(CPDFFileParameter):
 
     @property
     def img_dpi(self):
+        """
+        The DPI of the image. Must be greater than 0.
+        """
         return self._img_dpi
 
     @img_dpi.setter
@@ -720,6 +785,9 @@ class CPDFToPPTParameter(CPDFFileParameter):
 
     @property
     def is_contain_annot(self):
+        """
+        Whether to contain the annotations or not.
+        """
         return self._is_contain_annot
 
     @is_contain_annot.setter
@@ -730,6 +798,9 @@ class CPDFToPPTParameter(CPDFFileParameter):
 
     @property
     def is_contain_img(self):
+        """
+        Whether to contain the images or not.
+        """
         return self._is_contain_img
 
     @is_contain_img.setter
@@ -756,6 +827,9 @@ class CPDFToRTFParameter(CPDFFileParameter):
 
     @property
     def is_contain_annot(self):
+        """
+        Whether to contain the annotations or not.
+        """
         return self._is_contain_annot
 
     @is_contain_annot.setter
@@ -766,6 +840,9 @@ class CPDFToRTFParameter(CPDFFileParameter):
 
     @property
     def is_contain_img(self):
+        """
+        Whether to contain the images or not.
+        """
         return self._is_contain_img
 
     @is_contain_img.setter
@@ -798,6 +875,9 @@ class CPDFToWordParameter(CPDFFileParameter):
 
     @property
     def is_contain_annot(self):
+        """
+        Whether to contain the annotations or not.
+        """
         return self._is_contain_annot
 
     @is_contain_annot.setter
@@ -808,6 +888,9 @@ class CPDFToWordParameter(CPDFFileParameter):
 
     @property
     def is_contain_img(self):
+        """
+        Whether to contain the images or not.
+        """
         return self._is_contain_img
 
     @is_contain_img.setter
@@ -818,6 +901,9 @@ class CPDFToWordParameter(CPDFFileParameter):
 
     @property
     def is_flow_layout(self):
+        """
+        Whether to use flow layout or not.
+        """
         return self._is_flow_layout
 
     @is_flow_layout.setter
@@ -857,6 +943,9 @@ class CWordToPDFParameter(CPDFFileParameter):
 
 
 class CPDFFileParameterFactory:
+    """
+    Factory class to create CPDFFileParameter object.
+    """
 
     def get_file_parameter_by_type(self, type):
         CPDFFileParameter = None

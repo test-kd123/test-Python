@@ -16,6 +16,10 @@ class CPDFCreateTaskResult:
 
     @property
     def task_id(self):
+        """
+        Task id from the creation result.
+        :return:
+        """
         return self._task_id
 
     @task_id.setter
@@ -32,6 +36,7 @@ class CPDFFileInfo:
 
     This class defines the file information returned by the ComPDFKit API.
     """
+
     def __init__(self, json):
         self._file_key = json['fileKey']
         self._task_id = json['taskId']
@@ -51,6 +56,10 @@ class CPDFFileInfo:
 
     @property
     def file_key(self):
+        """
+        File key from the file information.
+        :return:
+        """
         return self._file_key
 
     @file_key.setter
@@ -59,6 +68,10 @@ class CPDFFileInfo:
 
     @property
     def task_id(self):
+        """
+        Task id from the file information.
+        :return:
+        """
         return self._task_id
 
     @task_id.setter
@@ -67,6 +80,10 @@ class CPDFFileInfo:
 
     @property
     def file_name(self):
+        """
+        File name from the file information.
+        :return:
+        """
         return self._file_name
 
     @file_name.setter
@@ -75,6 +92,10 @@ class CPDFFileInfo:
 
     @property
     def file_url(self):
+        """
+        File url from the file information.
+        :return:
+        """
         return self._file_url
 
     @file_url.setter
@@ -83,6 +104,10 @@ class CPDFFileInfo:
 
     @property
     def download_url(self):
+        """
+        The result download url from the file information.
+        :return:
+        """
         return self._download_url
 
     @download_url.setter
@@ -91,6 +116,10 @@ class CPDFFileInfo:
 
     @property
     def source_type(self):
+        """
+        Source type from the file information.
+        :return:
+        """
         return self._source_type
 
     @source_type.setter
@@ -99,6 +128,10 @@ class CPDFFileInfo:
 
     @property
     def target_type(self):
+        """
+        Target type from the file information.
+        :return:
+        """
         return self._target_type
 
     @target_type.setter
@@ -107,6 +140,10 @@ class CPDFFileInfo:
 
     @property
     def file_size(self):
+        """
+        File size from the file information.
+        :return:
+        """
         return self._file_size
 
     @file_size.setter
@@ -115,6 +152,10 @@ class CPDFFileInfo:
 
     @property
     def convert_size(self):
+        """
+        Convert size from the file information.
+        :return:
+        """
         return self._convert_size
 
     @convert_size.setter
@@ -123,6 +164,10 @@ class CPDFFileInfo:
 
     @property
     def convert_time(self):
+        """
+        Convert time from the file information.
+        :return:
+        """
         return self._convert_time
 
     @convert_time.setter
@@ -131,6 +176,10 @@ class CPDFFileInfo:
 
     @property
     def status(self):
+        """
+        Task status from the file information. Returns "success" or "failed".
+        :return:
+        """
         return self._status
 
     @status.setter
@@ -139,6 +188,11 @@ class CPDFFileInfo:
 
     @property
     def failure_code(self):
+        """
+        Failure code from the file information. For the list of failure codes, see
+        https://api.compdf.com/api-reference/errors
+        :return:
+        """
         return self._failure_code
 
     @failure_code.setter
@@ -147,6 +201,10 @@ class CPDFFileInfo:
 
     @property
     def failure_reason(self):
+        """
+        Failure reason from the file information.
+        :return:
+        """
         return self._failure_reason
 
     @failure_reason.setter
@@ -155,6 +213,10 @@ class CPDFFileInfo:
 
     @property
     def down_file_name(self):
+        """
+        Filename of the result from the file information.
+        :return:
+        """
         return self._down_file_name
 
     @down_file_name.setter
@@ -163,6 +225,10 @@ class CPDFFileInfo:
 
     @property
     def file_parameter(self):
+        """
+        File parameter for the task.
+        :return:
+        """
         return self._file_parameter
 
     @file_parameter.setter
@@ -184,6 +250,7 @@ class CPDFOauthResult:
 
     This class defines the oauth result returned by the ComPDFKit API.
     """
+
     def __init__(self, json):
         self._expires_in = json['expiresIn']
         self._scope = json['scope']
@@ -196,6 +263,10 @@ class CPDFOauthResult:
 
     @property
     def expires_in(self):
+        """
+        Expiration time of the token.
+        :return:
+        """
         return self._expires_in
 
     @expires_in.setter
@@ -204,6 +275,10 @@ class CPDFOauthResult:
 
     @property
     def scope(self):
+        """
+        Token Range.
+        :return:
+        """
         return self._scope
 
     @scope.setter
@@ -212,6 +287,10 @@ class CPDFOauthResult:
 
     @property
     def access_token(self):
+        """
+        Access token string.
+        :return:
+        """
         return self._access_token
 
     @access_token.setter
@@ -220,6 +299,10 @@ class CPDFOauthResult:
 
     @property
     def token_type(self):
+        """
+        The type of the token.
+        :return:
+        """
         return self._token_type
 
     @token_type.setter
@@ -228,6 +311,10 @@ class CPDFOauthResult:
 
     @property
     def project_name(self):
+        """
+        Project Name.
+        :return:
+        """
         return self._project_name
 
     @project_name.setter
@@ -470,6 +557,7 @@ class CPDFResult(object):
 
     This class defines the common result returned by the ComPDFKit API.
     """
+
     def __init__(self, code, msg, data):
         self._code = code
         self._msg = msg
@@ -477,6 +565,10 @@ class CPDFResult(object):
 
     @property
     def code(self):
+        """
+        The result code.
+        :return:
+        """
         return self._code
 
     @code.setter
@@ -485,6 +577,10 @@ class CPDFResult(object):
 
     @property
     def msg(self):
+        """
+        The result message.
+        :return:
+        """
         return self._msg
 
     @msg.setter
@@ -493,6 +589,10 @@ class CPDFResult(object):
 
     @property
     def data(self):
+        """
+        The data information of the result.
+        :return:
+        """
         return self._data
 
     @data.setter
@@ -530,6 +630,10 @@ class CPDFTaskInfoResult:
 
     @property
     def task_id(self):
+        """
+        Task id from the task information.
+        :return:
+        """
         return self._task_id
 
     @task_id.setter
@@ -538,6 +642,10 @@ class CPDFTaskInfoResult:
 
     @property
     def task_file_num(self):
+        """
+        The file number to process of the task.
+        :return:
+        """
         return self._task_file_num
 
     @task_file_num.setter
@@ -546,6 +654,10 @@ class CPDFTaskInfoResult:
 
     @property
     def task_success_num(self):
+        """
+        The number of successfully processed files of the task.
+        :return:
+        """
         return self._task_success_num
 
     @task_success_num.setter
@@ -554,6 +666,10 @@ class CPDFTaskInfoResult:
 
     @property
     def task_fail_num(self):
+        """
+        The number of failed processed files of the task.
+        :return:
+        """
         return self._task_fail_num
 
     @task_fail_num.setter
@@ -562,6 +678,10 @@ class CPDFTaskInfoResult:
 
     @property
     def task_status(self):
+        """
+        The status of the task. Returns "TaskStart", "TaskWaiting", "TaskProcessing", "TaskFinish" or "TaskOverdue".
+        :return:
+        """
         return self._task_status
 
     @task_status.setter
@@ -570,6 +690,10 @@ class CPDFTaskInfoResult:
 
     @property
     def asset_type_id(self):
+        """
+        Use asset type ID.
+        :return:
+        """
         return self._asset_type_id
 
     @asset_type_id.setter
@@ -578,6 +702,10 @@ class CPDFTaskInfoResult:
 
     @property
     def task_cost(self):
+        """
+        The cost of the task.
+        :return:
+        """
         return self._task_cost
 
     @task_cost.setter
@@ -586,6 +714,10 @@ class CPDFTaskInfoResult:
 
     @property
     def task_time(self):
+        """
+        The time spent on task.
+        :return:
+        """
         return self._task_time
 
     @task_time.setter
@@ -594,6 +726,10 @@ class CPDFTaskInfoResult:
 
     @property
     def source_type(self):
+        """
+        Source file format from the task information.
+        :return:
+        """
         return self._source_type
 
     @source_type.setter
@@ -602,6 +738,10 @@ class CPDFTaskInfoResult:
 
     @property
     def target_type(self):
+        """
+        Target file format from the task information.
+        :return:
+        """
         return self._target_type
 
     @target_type.setter
@@ -610,6 +750,10 @@ class CPDFTaskInfoResult:
 
     @property
     def callback_url(self):
+        """
+        The callback url of the task.
+        :return:
+        """
         return self._callback_url
 
     @callback_url.setter
@@ -618,6 +762,10 @@ class CPDFTaskInfoResult:
 
     @property
     def cpdf_file_info_list(self):
+        """
+        Task file information list.
+        :return:
+        """
         return self._cpdf_file_info_list
 
     @cpdf_file_info_list.setter
@@ -646,6 +794,7 @@ class CPDFTaskRecordsResult:
 
     This class defines the task records returned by the ComPDFKit API.
     """
+
     def __init__(self, total, current, pages, size, optimize_count_sql, records, max_limit, search_count, orders, count_id):
         self._total = total
         self._current = current
@@ -811,6 +960,10 @@ class CPDFTool:
 
     @property
     def source_type_name(self):
+        """
+        Source file format.
+        :return:
+        """
         return self._source_type_name
 
     @source_type_name.setter
@@ -819,6 +972,10 @@ class CPDFTool:
 
     @property
     def target_type_name(self):
+        """
+        Target file format.
+        :return:
+        """
         return self._target_type_name
 
     @target_type_name.setter
@@ -827,6 +984,10 @@ class CPDFTool:
 
     @property
     def execute_type_url(self):
+        """
+        The url to execute the tool.
+        :return:
+        """
         return self._execute_type_url
 
     @execute_type_url.setter
@@ -834,7 +995,8 @@ class CPDFTool:
         self._execute_type_url = value
 
     def __str__(self):
-        return f"Tool{{sourceTypeName='{self._source_type_name}', targetTypeName='{self._target_type_name}', executeTypeUrl='{self._execute_type_url}'}}"
+        return (f"Tool{{sourceTypeName='{self._source_type_name}', targetTypeName='{self._target_type_name}', "
+                f"executeTypeUrl='{self._execute_type_url}'}}")
 
 
 class CPDFToolResultItem:
@@ -879,6 +1041,10 @@ class CPDFUploadFileResult:
 
     @property
     def file_key(self):
+        """
+        File key from the upload result.
+        :return:
+        """
         return self._file_key
 
     @file_key.setter
@@ -887,6 +1053,10 @@ class CPDFUploadFileResult:
 
     @property
     def file_url(self):
+        """
+        File url from the upload result.
+        :return:
+        """
         return self._file_url
 
     @file_url.setter
