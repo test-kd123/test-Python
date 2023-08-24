@@ -11,7 +11,7 @@ import sys
 
 project = 'ComPDFKit API Libraries'
 copyright = '2014-2023 PDF Technologies, Inc. All Rights Reserved'
-author = 'youna'
+author = 'PDF Technologies, Inc.'
 release = '1.3.2'
 
 # -- General configuration ---------------------------------------------------

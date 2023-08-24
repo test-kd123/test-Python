@@ -145,7 +145,7 @@ class CPDFClient:
                                 image=None, image_file_name=None, language=CPDFLanguageConstant.ENGLISH):
         (file_path, file_name) = os.path.split(file)
 
-        if image_file_name is None:
+        if image is not None and image_file_name is None:
             (image_path, image_file_name) = os.path.split(image)
 
         return self._http_client.get_upload_file_result(file=file, task_id=task_id, password=password,
@@ -199,6 +199,22 @@ class CPDFHttpClient:
         self._connect_timeout = connection_timeout
         self.refresh_access_token()
 
+    def _handle_error_code(self, response):
+        if response.status_code == 504:
+            raise CPDFException(cause="504 Gateway Timeout. Please try again later.")
+        elif response.status_code == 401 or response.status_code == 413:
+            raise CPDFException(code=response.json()['code'], message="Response error:" + response.json()['msg'])
+        elif response.status_code == 400:
+            raise CPDFException(cause="400 Bad Request. Please check your request parameters.")
+        elif response.status_code == 403:
+            raise CPDFException(cause="403 Forbidden. Please check your access token.")
+        elif response.status_code == 404:
+            raise CPDFException(cause="404 Not Found. Please check your request url.")
+        elif response.status_code == 405:
+            raise CPDFException(cause="405 Method Not Allowed. Please check your request method.")
+        else:
+            raise CPDFException(cause="Unknown error. The status code is " + str(response.status_code) + ".")
+
     def _basic_headers(self):
         header = {"Authorization": "Bearer " + self._access_token}
         return header
@@ -247,7 +263,7 @@ class CPDFHttpClient:
             print(response.json())
             return CPDFOauthResult(response.json()['data'])
         else:
-            raise CPDFException(code=response.json()['code'], message=response.json()['msg'])
+            self._handle_error_code(response)
 
     def get_tools(self):
         """
@@ -261,7 +277,7 @@ class CPDFHttpClient:
                 result.append(CPDFTool(tool))
             return result
         else:
-            raise CPDFException(code=response.json()['code'], message=response.json()['msg'])
+            self._handle_error_code(response)
 
     def get_file_info(self, file_key, language=CPDFLanguageConstant.ENGLISH):
         """
@@ -281,7 +297,7 @@ class CPDFHttpClient:
             print(response.json())
             return CPDFFileInfo(response.json()["data"])
         else:
-            raise CPDFException(code=response.json()['code'], message=response.json()['msg'])
+            self._handle_error_code(response)
 
     def get_asset_info(self):
         """
@@ -293,7 +309,7 @@ class CPDFHttpClient:
             print(response.json()["data"])
             return response.json()['data']
         else:
-            raise CPDFException(code=response.json()['code'], message=response.json()['msg'])
+            self._handle_error_code(response)
 
     def get_task_list(self, page="1", size="5"):
         """
@@ -310,7 +326,7 @@ class CPDFHttpClient:
             print(response.json()["data"])
             return response.json()['data']
         else:
-            raise CPDFException(code=response.json()['code'], message=response.json()['msg'])
+            self._handle_error_code(response)
 
     def create_task(self, execute_type_url, language=CPDFLanguageConstant.ENGLISH):
         """
@@ -328,7 +344,7 @@ class CPDFHttpClient:
             print(response.json()["data"])
             return CPDFCreateTaskResult(response.json()['data'])
         else:
-            raise CPDFException(code=response.json()['code'], message=response.json()['msg'])
+            self._handle_error_code(response)
 
     def get_upload_file_result(self, file, task_id, password=None, file_parameter=None, file_name=None,
                                image=None, image_file_name=None, language=CPDFLanguageConstant.ENGLISH):
@@ -379,7 +395,7 @@ class CPDFHttpClient:
             print(response.json()["data"])
             return CPDFUploadFileResult(response.json()['data'])
         else:
-            raise CPDFException(code=response.json()['code'], message=response.json()['msg'])
+            self._handle_error_code(response)
 
     def execute_task(self, task_id, language=CPDFLanguageConstant.ENGLISH):
         """
@@ -400,7 +416,7 @@ class CPDFHttpClient:
             print(response.json()["data"])
             return CPDFCreateTaskResult(response.json()['data'])
         else:
-            raise CPDFException(code=response.json()['code'], message=response.json()['msg'])
+            self._handle_error_code(response)
 
     def get_task_info(self, task_id, language=CPDFLanguageConstant.ENGLISH):
         """
@@ -418,4 +434,4 @@ class CPDFHttpClient:
             print(response.json()["data"])
             return CPDFTaskInfoResult(response.json()['data'])
         else:
-            raise CPDFException(code=response.json()['code'], message=response.json()['msg'])
+            self._handle_error_code(response)
