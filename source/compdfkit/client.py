@@ -96,7 +96,7 @@ class CPDFClient:
         You can perform other operations according to the task result, such as downloading the result file.
 
         :type task_object: Any
-        :param language: CPDFLanguageConstant
+        :type language: CPDFLanguageConstant
         :param task_object: The task type or url of the task.
                             The object type can be CPDFConversionEnum, CPDFDocumentAIEnum, CPDFDocumentEditorEnum, str.
         :param language: The language of log information. Default: English.
@@ -199,6 +199,39 @@ class CPDFHttpClient:
         self._connect_timeout = connection_timeout
         self.refresh_access_token()
 
+    def _handle_error_response(self, response=None):
+        error_code = ["01001", "01002", "01003", "01004", "01005", "01006", "01201", "01202", "01203", "01204", "01205",
+                      "01206", "02001", "02002", "02201", "02203", "02204", "02205", "02206", "02207", "02208", "02209",
+                      "02210", "03000", "04001", "04002", "04003", "05001", "05002", "05003", "05004", "05005", "06001",
+                      "07001"]
+        code = 'code'
+        msg = response.json()['msg']
+
+        if response is not None:
+            code = response.json()['code']
+            if code == '400':
+                raise CPDFException(code=code,
+                                    message=f"Response error:{msg}. Please check your public key and secret key.")
+            elif code == '200':
+                if 'accessToken' in response.json()['data']:
+                    return
+                elif 'failureCode' in response.json()['data']:
+                    code = response.json()['data']['failureCode']
+                    msg = response.json()['data']['failureReason']
+                elif 'fileInfoDTOList' in response.json()['data']:
+                    for file_info in response.json()['data']['fileInfoDTOList']:
+                        if 'failureCode' in file_info:
+                            info_code = file_info['failureCode']
+                            info_msg = file_info['failureReason']
+
+                            if info_code in error_code:
+                                raise CPDFException(code=code,
+                                                    message=f"Failure code: {info_code}, Failure reason: {info_msg}.")
+
+        if code in error_code:
+            raise CPDFException(code=code,
+                                message=f"Failure code: {code}, Failure reason: {msg}.")
+
     def _handle_error_code(self, response):
         if response.status_code == 504:
             raise CPDFException(cause="504 Gateway Timeout. Please try again later.")
@@ -260,7 +293,7 @@ class CPDFHttpClient:
 
         response = requests.post(url, headers=headers, json=data)
         if response.status_code == 200:
-            print(response.json())
+            self._handle_error_response(response=response)
             return CPDFOauthResult(response.json()['data'])
         else:
             self._handle_error_code(response)
@@ -294,7 +327,7 @@ class CPDFHttpClient:
         response = requests.get(url, headers=self._basic_headers(), params=params)
 
         if response.status_code == 200:
-            print(response.json())
+            self._handle_error_response(response=response)
             return CPDFFileInfo(response.json()["data"])
         else:
             self._handle_error_code(response)
@@ -306,7 +339,7 @@ class CPDFHttpClient:
         url = self.ADDRESS + CPDFConstant.API_V1_ASSET_INFO
         response = requests.get(url, headers=self._basic_headers())
         if response.status_code == 200:
-            print(response.json()["data"])
+            self._handle_error_response(response=response)
             return response.json()['data']
         else:
             self._handle_error_code(response)
@@ -323,7 +356,7 @@ class CPDFHttpClient:
         params = {"page": page, "pageSize": size}
         response = requests.get(url, headers=self._basic_headers(), params=params)
         if response.status_code == 200:
-            print(response.json()["data"])
+            self._handle_error_response(response=response)
             return response.json()['data']
         else:
             self._handle_error_code(response)
@@ -341,7 +374,7 @@ class CPDFHttpClient:
 
         response = requests.get(url, headers=self._basic_headers(), params=params)
         if response.status_code == 200:
-            print(response.json()["data"])
+            self._handle_error_response(response=response)
             return CPDFCreateTaskResult(response.json()['data'])
         else:
             self._handle_error_code(response)
@@ -392,7 +425,7 @@ class CPDFHttpClient:
         headers["Content-Type"] = data.content_type
         response = requests.post(url, data=data, headers=headers)
         if response.status_code == 200:
-            print(response.json()["data"])
+            self._handle_error_response(response=response)
             return CPDFUploadFileResult(response.json()['data'])
         else:
             self._handle_error_code(response)
@@ -413,13 +446,15 @@ class CPDFHttpClient:
 
         response = requests.get(url, headers=self._basic_headers(), params=params)
         if response.status_code == 200:
-            print(response.json()["data"])
+            self._handle_error_response(response=response)
             return CPDFCreateTaskResult(response.json()['data'])
         else:
             self._handle_error_code(response)
 
     def get_task_info(self, task_id, language=CPDFLanguageConstant.ENGLISH):
         """
+        :type language: int
+        :param language: The language of the logout. Default: English.
         :type task_id: str
         :param task_id: The task id of the task.
         :return: The result of the task info.
@@ -431,7 +466,7 @@ class CPDFHttpClient:
         }
         response = requests.get(url, headers=self._basic_headers(), params=params)
         if response.status_code == 200:
-            print(response.json()["data"])
+            self._handle_error_response(response=response)
             return CPDFTaskInfoResult(response.json()['data'])
         else:
             self._handle_error_code(response)

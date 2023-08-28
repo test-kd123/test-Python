@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf8") as fh:
 
 setup(
     name='compdfkit-api-python',
-    version='0.0.3',
+    version='0.0.4',
     description='Python SDK for compdfkit API',
     long_description=long_description,
     long_description_content_type="text/markdown",
