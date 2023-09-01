@@ -614,7 +614,7 @@ class CPDFToExcelParameter(CPDFFileParameter):
     @property
     def content_options(self):
         """
-        The content options of the Excel file.
+        The content options of the Excel file. ("1":OnlyText, "2":OnlyTable, "3":AllContent)
         """
         return self._content_options
 
@@ -625,7 +625,7 @@ class CPDFToExcelParameter(CPDFFileParameter):
     @property
     def worksheet_options(self):
         """
-        The worksheet options of the Excel file.
+        The worksheet options of the Excel file. ("1":ForEachTable, "2":ForEachPage, "3":ForTheDocument)
         """
         return self._worksheet_options
 
@@ -753,7 +753,7 @@ class CPDFToJpgParameter(CPDFFileParameter):
 class CPDFToPngParameter(CPDFFileParameter):
     def __init__(self):
         super().__init__()
-        self.img_dpi = "300"
+        self._img_dpi = "300"
 
     @property
     def img_dpi(self):
@@ -768,7 +768,7 @@ class CPDFToPngParameter(CPDFFileParameter):
             raise ValueError("Invalid value for DPI. Must be greater than 0")
 
     def to_cpdf_json_str(self):
-        json_dict = {"imgDpi": self.img_dpi}
+        json_dict = {"imgDpi": self._img_dpi}
         return json.dumps(json_dict)
 
 
@@ -871,7 +871,7 @@ class CPDFToWordParameter(CPDFFileParameter):
         super().__init__()
         self._is_contain_annot = self.IS_CONTAIN_ANNOT
         self._is_contain_img = self.IS_CONTAIN_IMG
-        self._is_flow_layout = self.IS_FLOW_LAYOUT
+        self._is_flow_layout = self.NOT_IS_FLOW_LAYOUT
 
     @property
     def is_contain_annot(self):
